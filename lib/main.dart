@@ -4,61 +4,37 @@ import 'package:audioplayers/audio_cache.dart';
 void main() => runApp(XylophoneApp());
 
 class XylophoneApp extends StatelessWidget {
+  void playSound(int num) {
+    final player = AudioCache();
+    player.play('note$num.wav');
+  }
+
+  Expanded buildKey({int number, Color color}) {
+    return Expanded(
+      child: FlatButton(
+        onPressed: () {
+          playSound(number);
+        },
+        color: color,
+        child: Text('Click Me'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
-            children: [
-              FlatButton(
-                onPressed: () {
-                  final player = AudioCache();
-                  player.play('note1.wav');
-                },
-                color: Colors.red,
-                child: Text('Click Me'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  final player = AudioCache();
-                  player.play('note2.wav');
-                },
-                color: Colors.orange,
-                child: Text('Click Me'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  final player = AudioCache();
-                  player.play('note3.wav');
-                },
-                color: Colors.yellow,
-                child: Text('Click Me'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  final player = AudioCache();
-                  player.play('note4.wav');
-                },
-                color: Colors.green,
-                child: Text('Click Me'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  final player = AudioCache();
-                  player.play('note5.wav');
-                },
-                color: Colors.blue,
-                child: Text('Click Me'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  final player = AudioCache();
-                  player.play('note6.wav');
-                },
-                color: Colors.purple,
-                child: Text('Click Me'),
-              ),
+            children: <Widget>[
+              buildKey(number: 1, color: Colors.red),
+              buildKey(number: 2, color: Colors.orange),
+              buildKey(number: 3, color: Colors.yellow),
+              buildKey(number: 4, color: Colors.green),
+              buildKey(number: 5, color: Colors.blue),
+              buildKey(number: 6, color: Colors.purple),
             ],
           ),
         ),
